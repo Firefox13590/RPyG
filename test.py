@@ -19,25 +19,29 @@ label = pyglet.text.Label("Hello world!",
 
 
 
-# @fenetre.event
-# def on_key_press(symbol, modifiers):
-#     if keys[key.A] or keys[key.LEFT]:
-#         print("left")
-#         label.x -= 16
-#     if keys[key.D] or keys[key.RIGHT]:
-#         label.x += 16
-#     if keys[key.S] or keys[key.DOWN]:
-#         label.y -= 16
-#     if keys[key.W] or keys[key.UP]:
-#         label.y += 16
-#     pass
+@fenetre.event
+def on_key_press(symbol, modifiers):
+    if keys[key.A] or keys[key.LEFT]:
+        print("left")
+        label.x -= 16
+        # key.MOTION_LEFT = LEFT
+    if keys[key.D] or keys[key.RIGHT]:
+        print("right")
+        label.x += 16
+    if keys[key.S] or keys[key.DOWN]:
+        print("down")
+        label.y -= 16
+    if keys[key.W] or keys[key.UP]:
+        print("up")
+        label.y += 16
+    pass
 
 
 @fenetre.event
 def on_draw():
     fenetre.clear()
     label.draw()
-    # fenetre.push_handlers(keys)
+    fenetre.push_handlers(keys)
     pass
 
 @fenetre.event
