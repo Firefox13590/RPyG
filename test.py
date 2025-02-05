@@ -4,6 +4,9 @@ from pyglet.window import key
 logo = pyglet.resource.image("images/favicon.ico")
 
 
+
+
+
 fenetre = pyglet.window.Window()
 fenetre.set_icon(logo)
 
