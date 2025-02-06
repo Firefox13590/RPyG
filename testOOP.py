@@ -2,7 +2,7 @@ import pyglet
 from pyglet.event import EVENT_HANDLE_STATE
 from pyglet.window import key
 
-# source characteres ASCII: https://en.wikipedia.org/wiki/List_of_Unicode_characters
+# source characteres unicodes: https://en.wikipedia.org/wiki/List_of_Unicode_characters
 
 class Fenetre(pyglet.window.Window):
     def __init__(self):
@@ -11,9 +11,22 @@ class Fenetre(pyglet.window.Window):
         self.set_icon(pyglet.resource.image("images/favicon.ico"))
         self.alive = 1
 
-        self.charText = "O /|\\ /\\"
-        self.charText2 = f"{chr(160)}O └|{chr(172)} {chr(160)}{chr(691)}L"
-        self.charText3 = "O] I| |\\"
+        self.charText = "O /\\ /\\"
+        self.charText2 = f"{chr(160)}O └|{chr(172)} {chr(160) + chr(691)}L"
+        self.charText3 = f"{chr(160)}O ⌈|⌋ {chr(160)}ֈ{chr(172)}"
+        self.giraffe = r"""\
+
+                                       ._ o o
+                                       \_`-)|_
+                                    ,""       \ 
+                                  ,"  ## |   ಠ ಠ. 
+                                ," ##   ,-\__    `.
+                              ,"       /     `--._;)
+                            ,"     ## /
+                          ,"   ##    /
+
+
+                    """
         self.savedSide = self.charText2
         self.msgText = "Hello world! We ballin today"
         self.states = ["idle", "move"]
@@ -23,6 +36,11 @@ class Fenetre(pyglet.window.Window):
                                        multiline=True, font_size=21,
                                        x=self.width//2, y=self.height//2,
                                        width=10, height=10)
+        self.enemy = pyglet.text.Label(self.giraffe,
+                                       font_size=5,
+                                       x=100, y=self.height // 2,
+                                       width=10, height=10)
+        self.drawnObjects = [self.label, self.enemy]
         pass
 
     def on_close(self) -> None:
@@ -42,13 +60,13 @@ class Fenetre(pyglet.window.Window):
             self.currentState = self.states[1]
 
         if symbol in mvtKeys[:2]:
-            self.label.x -= 16
+            self.label.x -= 32
         if symbol in mvtKeys[2:4]:
-            self.label.x += 16
+            self.label.x += 32
         if symbol in mvtKeys[4:6]:
-            self.label.y -= 16
+            self.label.y -= 32
         if symbol in mvtKeys[6:]:
-            self.label.y += 16
+            self.label.y += 32
 
         if symbol in mvtKeys[:2]:
             self.label.text = self.charText2
@@ -74,7 +92,8 @@ class Fenetre(pyglet.window.Window):
     def render(self):
         self.clear()
 
-        self.label.draw()
+        for el in self.drawnObjects:
+            el.draw()
 
         self.flip()
         pass

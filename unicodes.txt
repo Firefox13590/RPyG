@@ -2,3 +2,9 @@ chr(160): Non-breaking space [ ]
 chr(172): Not sign [¬]
 chr(691): Modifier Letter Small R [ʳ]
 chr(692): Modifier Letter Small Turned R [ʴ]
+chr(741): Modifier Letter Extra-High Tone Bar [˥]
+chr(745): Modifier Letter Extra-Low Tone Bar [˩]
+chr(746): Modifier Letter Yin Departing Tone Mark [˪]
+chr(801): Combining Palatalized Hook Below [̡]
+ [ ̷] 	(823) 	Combining Short Solidus Overlay
+[ ̸] 	(824) 	Combining Long Solidus Overlay
