@@ -2,6 +2,7 @@ import pyglet
 from pyglet.event import EVENT_HANDLE_STATE
 from pyglet.window import key
 
+# source characteres ASCII: https://en.wikipedia.org/wiki/List_of_Unicode_characters
 
 class Fenetre(pyglet.window.Window):
     def __init__(self):
@@ -11,12 +12,14 @@ class Fenetre(pyglet.window.Window):
         self.alive = 1
 
         self.charText = "O /|\\ /\\"
-        self.charText2 = ""
+        self.charText2 = f"{chr(160)}O └|{chr(172)} {chr(160)}{chr(691)}L"
+        self.charText3 = "O] I| |\\"
+        self.savedSide = self.charText2
         self.msgText = "Hello world! We ballin today"
         self.states = ["idle", "move"]
         self.currentState = self.states[0]
 
-        self.label = pyglet.text.Label(self.currentState,
+        self.label = pyglet.text.Label(self.charText,
                                        multiline=True, font_size=21,
                                        x=self.width//2, y=self.height//2,
                                        width=10, height=10)
@@ -47,12 +50,22 @@ class Fenetre(pyglet.window.Window):
         if symbol in mvtKeys[6:]:
             self.label.y += 16
 
-        self.label.text = self.currentState
+        if symbol in mvtKeys[:2]:
+            self.label.text = self.charText2
+            self.savedSide = self.charText2
+        elif symbol in mvtKeys[2:4]:
+            self.label.text = self.charText3
+            self.savedSide = self.charText3
+        else:
+            self.label.text = self.savedSide
+
+        # self.label.text = self.currentState
         pass
 
     def on_key_release(self, symbol: int, modifiers: int) -> EVENT_HANDLE_STATE:
         self.currentState = self.states[0]
-        self.label.text = self.currentState
+        # self.label.text = self.currentState
+        self.label.text = self.charText
         pass
 
     def update(self, dt):

@@ -1,0 +1,4 @@
+chr(160): Non-breaking space [ ]
+chr(172): Not sign [¬]
+chr(691): Modifier Letter Small R [ʳ]
+chr(692): Modifier Letter Small Turned R [ʴ]
