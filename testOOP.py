@@ -8,8 +8,10 @@ class Fenetre(pyglet.window.Window):
     def __init__(self):
         super().__init__()
 
+
         self.set_icon(pyglet.resource.image("images/favicon.ico"))
         self.alive = 1
+
 
         self.charText = "O /\\ /\\"
         self.charText2 = f"{chr(160)}O └|{chr(172)} {chr(160) + chr(691)}L"
@@ -32,14 +34,19 @@ class Fenetre(pyglet.window.Window):
         self.states = ["idle", "move"]
         self.currentState = self.states[0]
 
+
         self.label = pyglet.text.Label(self.charText,
                                        multiline=True, font_size=21,
                                        x=self.width//2, y=self.height//2,
                                        width=10, height=10)
-        self.enemy = pyglet.text.Label(self.giraffe,
-                                       font_size=5,
-                                       x=100, y=self.height // 2,
-                                       width=10, height=10)
+
+        doc = pyglet.text.document.AbstractDocument(self.giraffe)
+        self.enemy = pyglet.text.layout.TextLayout(doc,
+                                       wrap_lines=True,
+                                       x=self.height // 2, y=self.height // 2,
+                                       anchor_x="center", anchor_y="center",
+                                       width=100, height=self.height)
+
         self.drawnObjects = [self.label, self.enemy]
         pass
 
@@ -92,8 +99,11 @@ class Fenetre(pyglet.window.Window):
     def render(self):
         self.clear()
 
-        for el in self.drawnObjects:
-            el.draw()
+        # for el in self.drawnObjects:
+        #     el.draw()
+
+        self.label.draw()
+        self.enemy.draw()
 
         self.flip()
         pass
