@@ -4,6 +4,7 @@ from character import Player
 from ennemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
 from events import Fight, Buy, Trap
 import random as r
+import sys
 
 p = Player()
 explo = True
@@ -58,6 +59,8 @@ while explo:
             p.y += 1
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
+        elif mvt == "Q":
+            sys.exit()
         else:
             print("the road is blocked or the input is invalid")
             mvt = ""

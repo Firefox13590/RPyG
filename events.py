@@ -2,6 +2,7 @@ from character import Player
 from ennemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
 import random as r
 import os
+import sys
 
 p = Player()
 s = Slime()
@@ -24,7 +25,10 @@ def Fight(player, ennemy):
                      "[3]: Leave\n> ")
 
         while not move.isdigit():
-            move = input("Not a Number as input\n> ")
+            if move.upper() == "Q":
+                sys.exit()
+
+            move = input("Need a Number as input\n> ")
             if int(move) not in (1, 2, 3):
                 print("Not a valid number")
                 move = ""
