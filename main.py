@@ -5,6 +5,7 @@ from ennemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
 from events import Fight, Buy, Trap
 import random as r
 import sys
+import os
 
 p = Player()
 explo = True
@@ -16,6 +17,8 @@ g = Goblin()
 #print(map1)
 
 while explo:
+    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+
     cm = adventure[0]  #current map
     cp = cm[p.y][p.x]  #current pos
     mvt = ""
