@@ -10,6 +10,7 @@ import os
 p = Player()
 explo = True
 adventure = [map1, map2, map3]  #list of maps
+progress = 0 #progression des maps
 
 s = Slime()
 g = Goblin()
@@ -19,7 +20,7 @@ g = Goblin()
 while explo:
     os.system('cls' if os.name == 'nt' else "printf '\033c'")
 
-    cm = adventure[0]  #current map
+    cm = adventure[progress]  #current map
     cp = cm[p.y][p.x]  #current pos
     mvt = ""
     p.pos = [p.y, p.x]
@@ -30,18 +31,24 @@ while explo:
     if cp == 2:
         #mob = r.choice((s, g))
         mob = s
+        mob.currenthp = mob.maxhp
         Fight(p, mob)
     elif cp == 3:
         Buy()
     elif cp == 4:
         Trap()
     elif cp == 5:
-        if cm == map1:
-            Fight(p, Wormathron)
-        elif cm == map2:
+        if (cm & map1).any():
+            Fight(p, Wormathron())
+        elif (cm & map2).any():
             Fight(p, B2)
-        elif cm == map3:
+        elif (cm & map3).any():
             Fight(p, B3)
+
+        if progress < 2:
+            progress += 1
+
+        p.x, p.y = (0, 0)
 
     while mvt == "":
         print("Choose which direction?\n")

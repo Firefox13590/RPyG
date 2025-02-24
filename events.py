@@ -59,4 +59,4 @@ def Trap():
     pass
 
 
-Fight(p, s)
+# Fight(p, s)

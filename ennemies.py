@@ -107,8 +107,32 @@ class E6(Ennemy):
 #abstract class for bosses
 class Boss(Ennemy):
     pass
+
+
 #bosses
 class Wormathron(Boss):
+    def __init__(self):
+        super().__init__()
+        self.maxhp = 30
+        self.currenthp = self.maxhp
+        self.att = 10
+        self.df = 10
+        self.spd = 10
+        self.drop = range(10, 20)
+
+    def Sprite(self):
+        print(r'''
+               ________ __
+             /V V V V \    \
+            |          |    |
+             \_A_A_A_A/     /
+              \            /
+               |          /
+               |         /__/\
+                \____________/
+        ''')
+        pass
+
     pass
 
 
@@ -126,5 +150,7 @@ mob.Stats()
 mob = Goblin()
 mob.Stats()
 mob = CursedTree()
+mob.Stats()
+mob = Wormathron()
 mob.Stats()
 """
