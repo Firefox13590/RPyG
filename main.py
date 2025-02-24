@@ -25,8 +25,8 @@ while explo:
     mvt = ""
     p.pos = [p.y, p.x]
 
-    print(cp)
-    print(p.pos)
+    # print(cp)
+    # print(p.pos)
 
     if cp == 2:
         #mob = r.choice((s, g))
