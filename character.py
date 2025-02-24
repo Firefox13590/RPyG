@@ -4,18 +4,14 @@ class Player:
         self.currenthp = self.maxhp
         self.highrol = 5
         self.lowrol = 2
-        # self.highrol = 10
-        # self.lowrol = 5
         self.att = range(self.lowrol, self.highrol)
         self.chain = 0
         self.df = 10
         self.dodge = 0
         self.spd = 5
         self.gold = 0
-        self.x = 0
-        self.y = 0
-        # self.x = 2
-        # self.y = 4
+        self.x = 2
+        self.y = 4
         self.pos = [self.x, self.y]
 
     def Stats(self):
