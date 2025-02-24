@@ -122,7 +122,7 @@ class Wormathron(Boss):
 
     def Sprite(self):
         print(r'''
-               ________ __
+               _______ ___
              /V V V V \    \
             |          |    |
              \_A_A_A_A/     /
