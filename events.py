@@ -30,7 +30,7 @@ def Fight(player, ennemy):
 
             move = input("Need a Number as input\n> ")
             if int(move) not in (1, 2, 3):
-                print("Not a valid number")
+                print("Not a Number")
                 move = ""
 
         os.system('cls' if os.name == 'nt' else "printf '\033c'")
