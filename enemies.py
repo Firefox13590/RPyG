@@ -1,5 +1,5 @@
-#abstract class for ennemies
-class Ennemy:
+#abstract class for enemies
+class Enemy:
     def __init__(self):
         self.maxhp = 0
         self.currenthp = self.maxhp
@@ -22,13 +22,13 @@ class Ennemy:
     pass
 
 
-#ennemies
-class Slime(Ennemy):
+#enemies
+class Slime(Enemy):
     def __init__(self):
         super().__init__()
         self.maxhp = 10
         self.currenthp = self.maxhp
-        self.att = 3
+        self.att = range(3)
         self.df = 5
         self.spd = 3
         self.drop = range(3)
@@ -46,12 +46,12 @@ class Slime(Ennemy):
     pass
 
 
-class Goblin(Ennemy):
+class Goblin(Enemy):
     def __init__(self):
         super().__init__()
         self.maxhp = 15
         self.currenthp = self.maxhp
-        self.att = 5
+        self.att = range(5)
         self.df = 3
         self.spd = 5
         self.drop = range(6)
@@ -69,12 +69,12 @@ class Goblin(Ennemy):
     pass
 
 
-class CursedTree(Ennemy):
+class CursedTree(Enemy):
     def __init__(self):
         super().__init__()
         self.maxhp = 30
         self.currenthp = self.maxhp
-        self.att = 2
+        self.att = range(1, 2)
         self.df = 20
         self.spd = 1
         self.drop = range(4, 10)
@@ -92,20 +92,20 @@ class CursedTree(Ennemy):
     pass
 
 
-class E4(Ennemy):
+class E4(Enemy):
     pass
 
 
-class E5(Ennemy):
+class E5(Enemy):
     pass
 
 
-class E6(Ennemy):
+class E6(Enemy):
     pass
 
 
 #abstract class for bosses
-class Boss(Ennemy):
+class Boss(Enemy):
     pass
 
 
@@ -115,7 +115,7 @@ class Wormathron(Boss):
         super().__init__()
         self.maxhp = 30
         self.currenthp = self.maxhp
-        self.att = 10
+        self.att = range(3, 5)
         self.df = 10
         self.spd = 10
         self.drop = range(10, 20)

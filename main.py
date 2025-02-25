@@ -1,7 +1,7 @@
 from maps import map1, map2, map3
 from shops import products
 from character import Player
-from ennemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
+from enemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
 from events import Fight, Buy, Trap
 import random as r
 import sys
@@ -10,7 +10,7 @@ import os
 p = Player()
 explo = True
 adventure = [map1, map2, map3]  #list of maps
-progress = 0 #progression des maps
+progress = 0 #map progress
 
 s = Slime()
 g = Goblin()
@@ -19,7 +19,6 @@ g = Goblin()
 
 while explo:
     os.system('cls' if os.name == 'nt' else "printf '\033c'")
-
     cm = adventure[progress]  #current map
     cp = cm[p.y][p.x]  #current pos
     mvt = ""
@@ -38,11 +37,14 @@ while explo:
     elif cp == 4:
         Trap()
     elif cp == 5:
-        if (cm & map1).any():
+        # print(cm)
+        # print(map1)
+        # print(cm == map1)
+        if cm == map1:
             Fight(p, Wormathron())
-        elif (cm & map2).any():
+        elif cm == map2:
             Fight(p, B2)
-        elif (cm & map3).any():
+        elif cm == map3:
             Fight(p, B3)
 
         if progress < 2:
