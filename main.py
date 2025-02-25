@@ -1,8 +1,8 @@
 from maps import map1, map2, map3
-from shops import products
-from character import Player
-from enemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
-from events import Fight, Buy, Trap
+from shops import *
+from character import *
+from enemies import *
+from events import *
 import random as r
 import sys
 import os
@@ -18,7 +18,7 @@ g = Goblin()
 #print(map1)
 
 while explo:
-    os.system('cls' if os.name == 'nt' else "printf '\033c'")
+    os.system("cls" if os.name == "nt" else "clear")
     cm = adventure[progress]  #current map
     cp = cm[p.y][p.x]  #current pos
     mvt = ""
@@ -30,7 +30,7 @@ while explo:
     if cp == 2:
         #mob = r.choice((s, g))
         mob = s
-        mob.currenthp = mob.maxhp
+        mob.currentHp = mob.maxHp
         Fight(p, mob)
     elif cp == 3:
         Buy()

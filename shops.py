@@ -1,17 +1,19 @@
 
-# dict{str(nom produit): tuple(int(prix), str(description))}
-products = {"Health potion": (2, "Professionals have standards"),
-            "Bag of rock": (6, "Pretty heavy"),
-            "Protein powder": (4, "No pain no gain"),
-            "Rings": (10, "YOU'RE FAST AS FUCK BOIIIII"),
-            "Scissors": (15, "Cut your armor to become more resilient to attacks"),
-            "Fat juicy bloody steamy steak": (25, "9 out of 10 doctors recommend to increase life expectancy"),
-            "Fighting tactics": (40, "With a bit of luck, you can hit enemies multiple times"),
-            "Mobility training": (40, "When fast enough, you can dodge attacks"),
-            "Guide of the Warrior": (75, "Anything you want for maximum damage"),
-            "Guide of the Paladin": (75, "Anything you want for maximum survivability"),
-            "Guide of the Hunter": (75, "Anything you want for maximum utility"),
-            "DnDice": (99, "99% of people quit before they win BIG")}
+# dict{str(product name): tuple(int(price), str(description), str(effect)}
+#  (n..m) = possible added stats
+products = {"Health potion": (2, "Professionals have standards", "set hp to max"),
+            "Bag of rock": (8, "Pretty heavy", "max dmg (2..3)"),
+            "Protein powder": (4, "No pain no gain", "min dmg (1..2)"),
+            "Rings": (10, "YOU'RE FAST AS FUCK BOIIIII", "speed (1..2)"),
+            "Scissors": (15, "Cut your armor to become more resilient to attacks", "def (1..2)"),
+            "Fat juicy bloody steamy steak": (25, "9 out of 10 doctors recommend to increase life expectancy",
+                                              "max hp (2..5)"),
+            "Fighting tactics": (40, "With a bit of luck, you can hit enemies multiple times", "chain (1..2)"),
+            "Mobility training": (40, "When fast enough, you can dodge attacks", "dodge (1..3)"),
+            "Guide of the Warrior": (75, "Anything you want for maximum damage", "min dmg (2..4); max dmg (3..5)"),
+            "Guide of the Paladin": (75, "Anything you want for maximum survivability", "max hp (3..7); def (2..3)"),
+            "Guide of the Hunter": (75, "Anything you want for maximum utility", "chain (2..3); dodge (2..4)"),
+            "DnDice": (99, "99% of people quit before they win BIG", "50/50 double gold or nothing")}
 
 # print(products)
 # print(products["Protein powder"])

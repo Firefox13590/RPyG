@@ -1,5 +1,5 @@
 from character import Player
-from enemies import Slime, Goblin, CursedTree, E4, E5, E6, Wormathron, B2, B3
+from enemies import *
 import random as r
 import os
 import sys
@@ -31,6 +31,7 @@ def Fight(player, enemy):
 
             defender.Stats()
             if attacker == player:
+                player.Stats()
                 move = input("\nWhat to do?\n"
                              "[1]: Attack\n"
                              "[2]: Use item\n"
@@ -49,27 +50,34 @@ def Fight(player, enemy):
             if int(move) == 1:
                 dmg = r.choice(attacker.att)
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
-                defender.currenthp -= dmg
-            if enemy.currenthp <= 0:
+                defender.currentHp -= dmg
+            if enemy.currentHp <= 0:
                 ggain = r.choice(enemy.drop)  #gold gain
                 print(f"Battle won\n{ggain} gold gained")
                 return
-            elif player.currenthp <= 0:
+            elif player.currentHp <= 0:
                 print("Battle lost")
-                return
+                sys.exit()
 
         next = input("> ")
         if next == next:
-            os.system('cls' if os.name == 'nt' else "printf '\033c'")
+            if next.upper() == "Q":
+                sys.exit()
+
+            os.system("cls" if os.name == "nt" else "clear")
             # print(next)
             # print(next == next)
-
+    pass
 
 def Buy():
     pass
 
 
 def Trap():
+    pass
+
+
+def Item():
     pass
 
 
