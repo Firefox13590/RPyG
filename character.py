@@ -5,13 +5,13 @@ class Player:
         self.maxRoll = 5
         self.minRoll = 3
         self.att = range(self.minRoll, self.maxRoll)
-        self.chain = 0 #% 2 multi hit
+        self.chain = 0 #multi hit %
         self.df = 10
-        self.dodge = 0 #% 2 negate enemy dmg
+        self.dodge = 0 #negate enemy dmg %
         self.spd = 5
         self.gold = 0
-        self.x = 0
-        self.y = 0
+        self.x = 4
+        self.y = 2
         self.pos = [self.x, self.y]
         self.inventory = {}
 

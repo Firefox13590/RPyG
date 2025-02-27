@@ -3,6 +3,7 @@ from enemies import *
 import random as r
 import os
 import sys
+from shops import products
 
 p = Player()
 s = Slime()
@@ -70,6 +71,10 @@ def Fight(player, enemy):
     pass
 
 def Buy():
+    for x, y in sorted(products.items(), key=lambda item: item[1][0]):
+        print(f"[{x}]: {y[0]}g, \"{y[1]}\"")
+
+    print()
     pass
 
 
