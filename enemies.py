@@ -6,7 +6,7 @@ class Enemy:
         self.att = 0
         self.df = 0
         self.spd = 0
-        self.drop = 0
+        self.drop = 0 #gold dropped
         pass
 
     def Sprite(self):
@@ -31,7 +31,7 @@ class Slime(Enemy):
         self.att = range(3)
         self.df = 5
         self.spd = 3
-        self.drop = range(3)
+        self.drop = range(1, 3)
 
     def Sprite(self):
         print(r'''
@@ -54,7 +54,7 @@ class Goblin(Enemy):
         self.att = range(5)
         self.df = 3
         self.spd = 5
-        self.drop = range(6)
+        self.drop = range(2, 6)
 
     def Sprite(self):
         print(r'''
@@ -72,7 +72,7 @@ class Goblin(Enemy):
 class CursedTree(Enemy):
     def __init__(self):
         super().__init__()
-        self.maxHp = 30
+        self.maxHp = 20
         self.currentHp = self.maxHp
         self.att = range(1, 2)
         self.df = 20
@@ -113,9 +113,9 @@ class Boss(Enemy):
 class Wormathron(Boss):
     def __init__(self):
         super().__init__()
-        self.maxHp = 30
+        self.maxHp = 20
         self.currentHp = self.maxHp
-        self.att = range(3, 5)
+        self.att = range(2, 5)
         self.df = 10
         self.spd = 10
         self.drop = range(10, 20)

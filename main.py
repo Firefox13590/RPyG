@@ -1,6 +1,6 @@
 from maps import map1, map2, map3
 from shops import *
-from character import *
+# from character import *
 from enemies import *
 from events import *
 import random as r
@@ -18,12 +18,11 @@ g = Goblin()
 #print(map1)
 
 while explo:
-    os.system("cls" if os.name == "nt" else "clear")
+    ClearText()
     cm = adventure[progress]  #current map
     cp = cm[p.y][p.x]  #current pos
     mvt = ""
     p.pos = [p.y, p.x]
-
     # print(cp)
     # print(p.pos)
 
@@ -54,6 +53,8 @@ while explo:
 
     while mvt == "":
         print("Choose which direction?\n")
+
+        # direction available
         if p.y != 0 and cm[p.y - 1][p.x] != 0:
             print("W: North")
         if p.x != 0 and cm[p.y][p.x - 1] != 0:
@@ -62,7 +63,10 @@ while explo:
             print("S: South")
         if p.x != 4 and cm[p.y][p.x + 1] != 0:
             print("D: East")
+
         mvt = input("> ").upper()
+
+        # movement
         if mvt == "W" and p.y != 0 and cm[p.y - 1][p.x] != 0:
             p.y -= 1
         elif mvt == "A" and p.x != 0 and cm[p.y][p.x - 1] != 0:
@@ -71,8 +75,7 @@ while explo:
             p.y += 1
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
-        elif mvt == "Q":
-            sys.exit()
         else:
+            EndScript(mvt)
             print("the road is blocked or the input is invalid")
             mvt = ""

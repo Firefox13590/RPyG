@@ -10,8 +10,8 @@ class Player:
         self.dodge = 0 #negate enemy dmg %
         self.spd = 5
         self.gold = 0
-        self.x = 4
-        self.y = 2
+        self.x = 0
+        self.y = 0
         self.pos = [self.x, self.y]
         self.inventory = {}
 
