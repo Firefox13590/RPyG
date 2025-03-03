@@ -5,15 +5,15 @@ class Player:
         self.maxRoll = 5
         self.minRoll = 3
         self.att = range(self.minRoll, self.maxRoll)
-        self.chain = 0 #multi hit %
+        self.chain = 0 #% to multi hit
         self.df = 10
-        self.dodge = 0 #negate enemy dmg %
+        self.dodge = 0 #% to negate enemy dmg
         self.spd = 5
-        self.gold = 0
-        self.x = 0
+        self.gold = 2
+        self.x = 2
         self.y = 0
         self.pos = [self.x, self.y]
-        self.inventory = {}
+        self.inventory = {"Health potion": [1, "Professionals have standards"]}
 
     def Stats(self):
         remain = round(20 * (self.currentHp / self.maxHp))

@@ -8,17 +8,13 @@ from shops import products
 p = Player()
 s = Slime()
 
-
+"""
+GAME EVENTS
+"""
 def Fight(player, enemy):
     move = ""
     next = ""
     order = [player, enemy] if player.spd >= enemy.spd else [enemy, player]
-    # if player.spd >= enemy.spd:
-    #     order.append(player)
-    #     order.append(enemy)
-    # else:
-    #     order.append(enemy)
-    #     order.append(player)
 
     while True:
         for attacker in order:
@@ -33,19 +29,19 @@ def Fight(player, enemy):
                              "[2]: Use item\n"
                              "[3]: Leave\n> ")
 
-                while not move.isdigit():
-                    EndScript(move)
+                while not (ValidInput(move, int) and (move in ("1", "2", "3"))):
+                    move = input("Need a Number from 1 to 3 as input\n> ")
 
-                    move = input("Need a Number as input\n> ")
-                    if int(move) not in (1, 2, 3):
-                        print("Not a Number")
-                        move = ""
+                move = int(move)
             else:
                 move = 1
-            if int(move) == 1:
+            # possible player actions
+            if move == 1:
                 dmg = r.choice(attacker.att)
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
                 defender.currentHp -= dmg
+            elif move == 2:
+                UseItem()
             if enemy.currentHp <= 0:
                 ggain = r.choice(enemy.drop)  #gold gain
                 print(f"Battle won\n{ggain} gold gained")
@@ -80,9 +76,13 @@ def Buy():
         print(msg)
         print(f"Gold remaining: {p.gold}g")
         purchase = input("What to buy?\n> ")
-        EndScript(purchase)
 
-        if purchase.isdigit():
+        # if purchase.isdigit():
+        #     purchase = int(purchase)
+        # else:
+        #     print("You're out")
+        #     break
+        if ValidInput(purchase, int):
             purchase = int(purchase)
         else:
             print("You're out")
@@ -124,11 +124,29 @@ def Trap():
     pass
 
 
-def Item():
+def UseItem():
+    ClearText()
+    index = 1
+    print(f"Help:\n[input]\t(Item, [nb available, description])\n")
+
+    for el in p.inventory.items():
+        print(f"[{index}]\t{el}")
+        index += 1
+
+    choice = input("> ")
+    EndScript(choice)
     pass
 
 
-def EndScript(input):
+"""
+CODE FUNCTIONALITIES
+"""
+def EndScript(input: object) -> None:
+    """
+
+    :param object input: User input
+    :return: None
+    """
     if str(input).upper() == "Q":
         sys.exit()
     pass
@@ -138,4 +156,28 @@ def ClearText():
     os.system("cls" if os.name == "nt" else "clear")
     pass
 
+
+def ValidInput(input: str, dataType) -> bool:
+    EndScript(input)
+    """
+
+    :param str input: User input
+    :param dataType: Data type to match with
+    :return: bool
+    """
+    try:
+        type(dataType(input))
+    except ValueError:
+        return False
+    else:
+        return True
+    # if type(dataType(input)) == dataType:
+    #     return True
+    # else:
+    #     return False
+
+
 # Fight(p, s)
+# print(ValidInput("true", bool))
+# print(bool("true") == bool)
+# print(bool("true"))
