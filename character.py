@@ -2,9 +2,9 @@ class Player:
     def __init__(self):
         self.maxHp = 25
         self.currentHp = self.maxHp
-        self.maxRoll = 5
-        self.minRoll = 3
-        self.att = range(self.minRoll, self.maxRoll)
+        self.maxDmg = 5
+        self.minDmg = 3
+        self.att = range(self.minDmg, self.maxDmg)
         self.chain = 0 #% to multi hit
         self.df = 10
         self.dodge = 0 #% to negate enemy dmg
@@ -13,7 +13,7 @@ class Player:
         self.x = 0
         self.y = 0
         self.pos = [self.x, self.y]
-        self.inventory = {}
+        self.inventory: dict = {}
 
     def Stats(self):
         remain = round(20 * (self.currentHp / self.maxHp))

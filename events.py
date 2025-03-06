@@ -1,7 +1,7 @@
 from character import Player
 from enemies import *
 from shops import products
-import random as r
+import random
 import os
 import sys
 
@@ -34,10 +34,11 @@ def Fight(player, enemy):
 
                 move = int(move)
             else:
+                # enemy can only attack
                 move = 1
             # possible battle actions
             if move == 1:
-                dmg = r.choice(attacker.att)
+                dmg = random.choice(attacker.att)
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
                 defender.currentHp -= dmg
             elif move == 2: #player only action
@@ -45,7 +46,7 @@ def Fight(player, enemy):
                 enemy.Stats()
             # end battle conditions
             if enemy.currentHp <= 0:
-                ggain = r.choice(enemy.drop)  #gold gain
+                ggain = random.choice(enemy.drop)  #gold gain
                 print(f"Battle won\n"
                       f"{ggain} gold gained")
                 player.gold += ggain
@@ -54,6 +55,7 @@ def Fight(player, enemy):
                 print("Battle lost")
                 sys.exit()
 
+        # intermediate step before clearing screen
         next = input("> ")
         if next == next:
             EndScript(next)
@@ -63,6 +65,7 @@ def Fight(player, enemy):
     pass
 
 def Buy(p):
+    # sort shop products by price
     sortedShop = sorted(products.items(), key=lambda item: item[1][0])
     msg = ""
 
@@ -73,6 +76,7 @@ def Buy(p):
               "write the input shown inside [brackets] to purchase\n")
 
         for x, y in sortedShop:
+            # display list of products
             print(f"[{index}]\t{x}: {y[0]}g, \"{y[1]}\"")
             index += 1
 
@@ -95,7 +99,7 @@ def Buy(p):
                     # print("not in inv")
                     # print(sortedShop[purchase - 1])
                     p.inventory[sortedShop[purchase - 1][0]] = sortedShop[purchase - 1][1] #add (key, value) pair
-                    # change int for price to int for nb of items
+                    # change int meaning price to int meaning nb of items
                     info = list(p.inventory[sortedShop[purchase - 1][0]])
                     info[0] = 1
                     # print(info)
@@ -126,6 +130,7 @@ def UseItem(p):
     ClearText()
 
     if len(p.inventory) == 0:
+        # cant use an item that doesn't exist, duh
         print("Inventory empty: no action possible\n")
         return
 
@@ -134,26 +139,65 @@ def UseItem(p):
           "Input item name to use it\n"
           "Not case sensitive\n"
           "Built-in text matching to avoid writing full name\n"
-          "Still lose turn if no item selected")
-    print()
+          "Still lose turn if no item selected\n")
 
     for el in p.inventory.items():
+        # print currently available items from player inv
         print(f"[{el[0].upper()}]\t({el[1][0]}, \'{el[1][1]}\')")
 
     choice = input("> ").lower()
     EndScript(choice)
 
+    # take list of currently available items from inv
     for item in p.inventory.keys():
-        print(item)
+        # print(item)
 
+        # match user input with dict key
         if choice in item.lower():
             print("Item found")
             p.inventory[item][0] -= 1
 
+            # apply item effect
             if item.lower() == "health potion":
-                print("Used Health potion")
+                print("You feel healthy")
                 p.currentHp = p.maxHp
-                p.Stats()
+            elif item.lower() == "protein powder":
+                print("You feel a bit stronger")
+                p.minDmg += random.choice((1, 2))
+            elif item.lower() == "bag of rocks":
+                print("Strength cap slightly higher")
+                p.maxDmg += random.choice(range(1, 4))
+            elif item.lower() == "rings":
+                print("Found the sonic fan")
+                p.spd += random.choice((1, 2))
+            elif item.lower() == "hammer":
+                print("It just works!")
+                p.df += random.choice((1, 2))
+            elif item.lower() == "fat juicy bloody steamy steak":
+                print("↑ ↑ ↓ ↓ ← → ← → B A Start Select")
+                p.maxHp += random.choice(range(2, 6))
+            elif item.lower() == "fighting tactics":
+                print("Player learned Rollout!")
+                p.chain += random.choice((1, 2))
+            elif item.lower() == "mobility training":
+                print("Average souls-like gamer")
+                p.dodge += random.choice(range(1, 4))
+            elif item.lower() == "guide of the Warrior":
+                print("Peak damage")
+                p.minDmg += random.choice(range(2, 5))
+                p.maxDmg += random.choice(range(3, 6))
+            elif item.lower() == "guide of the Paladin":
+                print("Peak survivability")
+                p.maxHp += random.choice(range(3, 8))
+                p.df += random.choice(range(2, 4))
+            elif item.lower() == "guide of the Hunter":
+                print("Peak utility")
+                p.chain += random.choice(range(2, 4))
+                p.dodge += random.choice(range(3, 5))
+            elif item.lower() == "dndice":
+                print("LET'S GO GAMBLING")
+                p.gold *= random.choice((0, 2))
+            # remove item from inv if nb is 0
             if p.inventory[item][0] == 0:
                 del p.inventory[item]
 
@@ -161,32 +205,37 @@ def UseItem(p):
         else:
             print("Item not found")
 
-    print(p.inventory)
+    # print(p.inventory)
     pass
 
 
 """
 GENERAL FUNCTIONS
 """
-def EndScript(input: object) -> None:
+def EndScript(input: str) -> None:
     """
-    Helps with testing by exiting the program
-    :param object input: User input
+    Shortcut to quickly end program
+    :param str input: User input
     :return: None
     """
     if str(input).lower() == "q":
         sys.exit()
-    pass
+    return
 
 
-def ClearText():
+def ClearText() -> None:
+    """
+    Clear terminal screen
+    :return: None
+    """
+    # cls for windows, clear for linux and mac
     os.system("cls" if os.name == "nt" else "clear")
-    pass
+    return
 
 
 def ValidInput(input: str, dataType) -> bool:
     """
-
+    Validation process when needing user input to fit specific data type
     :param str input: User input
     :param dataType: Data type to match with
     :return: bool
@@ -199,10 +248,6 @@ def ValidInput(input: str, dataType) -> bool:
         return False
     else:
         return True
-    # if type(dataType(input)) == dataType:
-    #     return True
-    # else:
-    #     return False
 
 
 # Fight(p, s)

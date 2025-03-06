@@ -3,7 +3,7 @@ from shops import products
 from character import Player
 from enemies import *
 from events import *
-import random as r
+import random
 import sys
 import os
 
@@ -27,7 +27,7 @@ while explo:
     # print(p.pos)
 
     if cp == 2:
-        #mob = r.choice((s, g))
+        #mob = random.choice((s, g))
         mob = s
         mob.currentHp = mob.maxHp
         Fight(p, mob)
