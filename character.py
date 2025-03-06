@@ -17,10 +17,10 @@ class Player:
 
     def Stats(self):
         remain = round(20 * (self.currentHp / self.maxHp))
-        print(f"{self.__class__.__name__}:")
-        print(f"{self.currentHp} HP left\n[" + "#" * remain
-              + "-" * (20 - remain) + "]")
+        print(f"{self.__class__.__name__}:\n"
+              f"{self.currentHp} HP left\n"
+              "[" + "#" * remain + "-" * (20 - remain) + "]")
 
 
 p = Player()
-#p.Stats()
+# p.Stats()

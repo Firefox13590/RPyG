@@ -1,12 +1,12 @@
 from character import Player
 from enemies import *
+from shops import products
 import random as r
 import os
 import sys
-from shops import products
 
-p = Player()
-s = Slime()
+# p = Player()
+# s = Slime()
 
 """
 GAME EVENTS
@@ -41,14 +41,14 @@ def Fight(player, enemy):
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
                 defender.currentHp -= dmg
             elif move == 2: #player only action
-                UseItem()
+                UseItem(player)
                 enemy.Stats()
             # end battle conditions
             if enemy.currentHp <= 0:
                 ggain = r.choice(enemy.drop)  #gold gain
                 print(f"Battle won\n"
                       f"{ggain} gold gained")
-                p.gold += ggain
+                player.gold += ggain
                 return
             elif player.currentHp <= 0:
                 print("Battle lost")
@@ -62,7 +62,7 @@ def Fight(player, enemy):
             # print(next == next)
     pass
 
-def Buy():
+def Buy(p):
     sortedShop = sorted(products.items(), key=lambda item: item[1][0])
     msg = ""
 
@@ -122,7 +122,7 @@ def Trap():
     pass
 
 
-def UseItem():
+def UseItem(p):
     ClearText()
 
     if len(p.inventory) == 0:
@@ -153,6 +153,7 @@ def UseItem():
             if item.lower() == "health potion":
                 print("Used Health potion")
                 p.currentHp = p.maxHp
+                p.Stats()
             if p.inventory[item][0] == 0:
                 del p.inventory[item]
 

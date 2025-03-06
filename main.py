@@ -1,6 +1,6 @@
 from maps import map1, map2, map3
-from shops import *
-# from character import *
+from shops import products
+from character import Player
 from enemies import *
 from events import *
 import random as r
@@ -32,7 +32,7 @@ while explo:
         mob.currentHp = mob.maxHp
         Fight(p, mob)
     elif cp == 3:
-        Buy()
+        Buy(p)
     elif cp == 4:
         Trap()
     elif cp == 5:
