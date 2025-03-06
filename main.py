@@ -11,10 +11,6 @@ p = Player()
 explo = True
 adventure = [map1, map2, map3]  #list of maps
 progress = 0 #map progress
-
-s = Slime()
-g = Goblin()
-
 #print(map1)
 
 while explo:
@@ -27,8 +23,12 @@ while explo:
     # print(p.pos)
 
     if cp == 2:
-        #mob = random.choice((s, g))
-        mob = s
+        if cm == map1:
+            mob = random.choice((Slime(), Goblin(), CursedTree()))
+        elif cm == map2:
+            mob = random.choice((E4(), E5(), E6()))
+        elif cm == map3:
+            mob = random.choice((E7(), E8(), E9()))
         mob.currentHp = mob.maxHp
         Fight(p, mob)
     elif cp == 3:
@@ -42,9 +42,9 @@ while explo:
         if cm == map1:
             Fight(p, Wormathron())
         elif cm == map2:
-            Fight(p, B2)
+            Fight(p, B2())
         elif cm == map3:
-            Fight(p, B3)
+            Fight(p, B3())
 
         if progress < 2:
             progress += 1

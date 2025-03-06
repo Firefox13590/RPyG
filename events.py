@@ -11,7 +11,13 @@ import sys
 """
 GAME EVENTS
 """
-def Fight(player, enemy):
+def Fight(player: Player, enemy: Enemy|Boss) -> None:
+    """
+    Handles enemy encounters
+    :param Player player: Instance of player class
+    :param Enemy|Boss enemy: Instance of child of enemy class
+    :return: None
+    """
     move = ""
     next = ""
     order = [player, enemy] if player.spd >= enemy.spd else [enemy, player]
@@ -62,9 +68,14 @@ def Fight(player, enemy):
             ClearText()
             # print(next)
             # print(next == next)
-    pass
+    return
 
 def Buy(p):
+    """
+    Handles shop interactions
+    :param p: Instance of player class
+    :return: None
+    """
     # sort shop products by price
     sortedShop = sorted(products.items(), key=lambda item: item[1][0])
     msg = ""
@@ -119,14 +130,19 @@ def Buy(p):
         else:
             print("You're out")
             break
-    pass
+    return
 
 
 def Trap():
-    pass
+    return
 
 
 def UseItem(p):
+    """
+    Handles item use
+    :param p: Instance of player class
+    :return: None
+    """
     ClearText()
 
     if len(p.inventory) == 0:
@@ -206,7 +222,7 @@ def UseItem(p):
             print("Item not found")
 
     # print(p.inventory)
-    pass
+    return
 
 
 """
@@ -238,7 +254,8 @@ def ValidInput(input: str, dataType) -> bool:
     Validation process when needing user input to fit specific data type
     :param str input: User input
     :param dataType: Data type to match with
-    :return: bool
+    :return: If input matches desired data type
+    :raise ValueError: If type conversion isn't possible
     """
     EndScript(input)
 

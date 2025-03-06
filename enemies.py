@@ -104,13 +104,25 @@ class E6(Enemy):
     pass
 
 
+class E7(Enemy):
+    pass
+
+
+class E8(Enemy):
+    pass
+
+
+class E9(Enemy):
+    pass
+
+
 #abstract class for bosses
 class Boss(Enemy):
     pass
 
 
 #bosses
-class Wormathron(Boss):
+class Wormathron(Enemy):
     def __init__(self):
         super().__init__()
         self.maxHp = 20
@@ -136,11 +148,11 @@ class Wormathron(Boss):
     pass
 
 
-class B2(Boss):
+class B2(Enemy):
     pass
 
 
-class B3(Boss):
+class B3(Enemy):
     pass
 
 
