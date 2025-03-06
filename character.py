@@ -10,10 +10,10 @@ class Player:
         self.dodge = 0 #% to negate enemy dmg
         self.spd = 5
         self.gold = 2
-        self.x = 2
+        self.x = 0
         self.y = 0
         self.pos = [self.x, self.y]
-        self.inventory = {"Health potion": [1, "Professionals have standards"]}
+        self.inventory = {}
 
     def Stats(self):
         remain = round(20 * (self.currentHp / self.maxHp))

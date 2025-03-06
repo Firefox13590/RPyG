@@ -1,6 +1,6 @@
 
 # dict{str(product name): tuple(int(price), str(description)}
-#  (n..m) = possible added stats
+# (n..m) = possible added stats
 products = {"Health potion": (2, "Professionals have standards"), #set hp to max
             "Bag of rock": (8, "Pretty heavy"), #max dmg (2..3)
             "Protein powder": (4, "No pain no gain"), #min dmg (1..2)
@@ -17,3 +17,4 @@ products = {"Health potion": (2, "Professionals have standards"), #set hp to max
 # print(products)
 # print(products["Protein powder"])
 # print(products["Protein powder"][1])
+# print(list(products["Health potion"]))

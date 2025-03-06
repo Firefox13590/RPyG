@@ -35,16 +35,19 @@ def Fight(player, enemy):
                 move = int(move)
             else:
                 move = 1
-            # possible player actions
+            # possible battle actions
             if move == 1:
                 dmg = r.choice(attacker.att)
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
                 defender.currentHp -= dmg
-            elif move == 2:
+            elif move == 2: #player only action
                 UseItem()
+                enemy.Stats()
+            # end battle conditions
             if enemy.currentHp <= 0:
                 ggain = r.choice(enemy.drop)  #gold gain
-                print(f"Battle won\n{ggain} gold gained")
+                print(f"Battle won\n"
+                      f"{ggain} gold gained")
                 p.gold += ggain
                 return
             elif player.currentHp <= 0:
@@ -54,7 +57,6 @@ def Fight(player, enemy):
         next = input("> ")
         if next == next:
             EndScript(next)
-
             ClearText()
             # print(next)
             # print(next == next)
@@ -67,27 +69,23 @@ def Buy():
     while True:
         ClearText()
         index = 1
+        print("You've stumbled into a shop!\n"
+              "write the input shown inside [brackets] to purchase\n")
 
         for x, y in sortedShop:
             print(f"[{index}]\t{x}: {y[0]}g, \"{y[1]}\"")
             index += 1
 
-        print(f"[Other input]\tNothing: free, \"Social interaction is scary\"\n\n")
-        print(msg)
-        print(f"Gold remaining: {p.gold}g")
+        print(f"[Other input]\tNothing: free, \"Social interaction is scary\"\n\n"
+              f"{msg}\n"
+              f"Gold remaining: {p.gold}g")
         purchase = input("What to buy?\n> ")
 
-        # if purchase.isdigit():
-        #     purchase = int(purchase)
-        # else:
-        #     print("You're out")
-        #     break
         if ValidInput(purchase, int):
             purchase = int(purchase)
         else:
             print("You're out")
             break
-
         if purchase in range(1, 13): #if input match options
             # print(sortedShop[purchase - 1][1][0])
             if p.gold < sortedShop[purchase - 1][1][0]:
@@ -96,7 +94,7 @@ def Buy():
                 if sortedShop[purchase - 1][0] not in p.inventory: #add item in inv
                     # print("not in inv")
                     # print(sortedShop[purchase - 1])
-                    p.inventory[sortedShop[purchase - 1][0]] = sortedShop[purchase - 1][1][:2] #set (key, value) pair
+                    p.inventory[sortedShop[purchase - 1][0]] = sortedShop[purchase - 1][1] #add (key, value) pair
                     # change int for price to int for nb of items
                     info = list(p.inventory[sortedShop[purchase - 1][0]])
                     info[0] = 1
@@ -126,28 +124,56 @@ def Trap():
 
 def UseItem():
     ClearText()
-    index = 1
-    print(f"Help:\n[input]\t(Item, [nb available, description])\n")
+
+    if len(p.inventory) == 0:
+        print("Inventory empty: no action possible\n")
+        return
+
+    print(f"Help:\n"
+          "Legend -> [ITEM] (Nb available, 'Description')\n"
+          "Input item name to use it\n"
+          "Not case sensitive\n"
+          "Built-in text matching to avoid writing full name\n"
+          "Still lose turn if no item selected")
+    print()
 
     for el in p.inventory.items():
-        print(f"[{index}]\t{el}")
-        index += 1
+        print(f"[{el[0].upper()}]\t({el[1][0]}, \'{el[1][1]}\')")
 
-    choice = input("> ")
+    choice = input("> ").lower()
     EndScript(choice)
+
+    for item in p.inventory.keys():
+        print(item)
+
+        if choice in item.lower():
+            print("Item found")
+            p.inventory[item][0] -= 1
+
+            if item.lower() == "health potion":
+                print("Used Health potion")
+                p.currentHp = p.maxHp
+            if p.inventory[item][0] == 0:
+                del p.inventory[item]
+
+            break
+        else:
+            print("Item not found")
+
+    print(p.inventory)
     pass
 
 
 """
-CODE FUNCTIONALITIES
+GENERAL FUNCTIONS
 """
 def EndScript(input: object) -> None:
     """
-
+    Helps with testing by exiting the program
     :param object input: User input
     :return: None
     """
-    if str(input).upper() == "Q":
+    if str(input).lower() == "q":
         sys.exit()
     pass
 
@@ -158,13 +184,14 @@ def ClearText():
 
 
 def ValidInput(input: str, dataType) -> bool:
-    EndScript(input)
     """
 
     :param str input: User input
     :param dataType: Data type to match with
     :return: bool
     """
+    EndScript(input)
+
     try:
         type(dataType(input))
     except ValueError:
