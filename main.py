@@ -8,12 +8,16 @@ import sys
 import os
 
 p = Player()
-explo = True
+explo = [[9, 9, 9, 9, 9],
+        [9, 9, 9, 9, 9],
+        [9, 9, 9, 9, 9],
+        [9, 9, 9, 9, 9],
+        [9, 9, 9, 9, 9]]
 adventure = [map1, map2, map3]  #list of maps
 progress = 0 #map progress
 #print(map1)
 
-while explo:
+while True:
     ClearText()
     cm = adventure[progress]  #current map
     cp = cm[p.y][p.x]  #current pos
@@ -34,7 +38,7 @@ while explo:
     elif cp == 3:
         Buy(p)
     elif cp == 4:
-        Trap()
+        Trap(p)
     elif cp == 5:
         # print(cm)
         # print(map1)
@@ -45,7 +49,7 @@ while explo:
             Fight(p, B2())
         elif cm == map3:
             Fight(p, B3())
-
+            break
         if progress < 2:
             progress += 1
 
@@ -64,7 +68,7 @@ while explo:
         if p.x != 4 and cm[p.y][p.x + 1] != 0:
             print("D: East")
 
-        mvt = input("> ").upper()
+        mvt = input("M: Show map\n> ").upper()
 
         # movement
         if mvt == "W" and p.y != 0 and cm[p.y - 1][p.x] != 0:
@@ -75,7 +79,12 @@ while explo:
             p.y += 1
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
+        elif mvt == "S":
+            showMap(explo)
+            pass
         else:
             EndScript(mvt)
             print("the road is blocked or the input is invalid")
             mvt = ""
+
+print("Thank you so much a-for-to playing my game!\n:D")

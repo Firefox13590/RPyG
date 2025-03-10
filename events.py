@@ -133,7 +133,18 @@ def Buy(p):
     return
 
 
-def Trap():
+def Trap(p):
+    """
+    Handles shop interactions
+    :param p: Instance of player class
+    :return: None
+    """
+    p.currentHp -= p.maxHp // 10
+
+    if p.currentHp <= 0:
+        print("Battle lost")
+        sys.exit()
+    
     return
 
 
@@ -222,6 +233,10 @@ def UseItem(p):
             print("Item not found")
 
     # print(p.inventory)
+    return
+
+
+def showMap(map:list[list[int]]):
     return
 
 
