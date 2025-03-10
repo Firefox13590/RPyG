@@ -79,7 +79,7 @@ while True:
             p.y += 1
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
-        elif mvt == "S":
+        elif mvt == "M":
             showMap(explo)
             pass
         else:

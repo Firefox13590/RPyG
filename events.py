@@ -139,12 +139,25 @@ def Trap(p):
     :param p: Instance of player class
     :return: None
     """
-    p.currentHp -= p.maxHp // 10
+    dmg = p.maxHp // random.choice(range(1, 21))
+    print(random.choice(range(1, 21)))
+    print(dmg)
+    p.currentHp -= dmg
+
+    if dmg > 10:
+        print("You stepped on a branch. ", end="")
+    elif dmg > 1:
+        print("You got hit by an interstellar alien laser. ", end="")
+    else:
+        print("You breathed a little too hard. ", end="")
+
+    print(f"You took {dmg} damage")
+    p.Stats()
 
     if p.currentHp <= 0:
         print("Battle lost")
         sys.exit()
-    
+
     return
 
 
