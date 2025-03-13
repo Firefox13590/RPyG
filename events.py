@@ -4,6 +4,7 @@ from shops import products
 import random
 import os
 import sys
+import math
 
 # p = Player()
 # s = Slime()
@@ -68,7 +69,7 @@ def Fight(player: Player, enemy: Enemy|Boss) -> None:
             ClearText()
             # print(next)
             # print(next == next)
-    return
+
 
 def Buy(p):
     """
@@ -135,16 +136,17 @@ def Buy(p):
 
 def Trap(p):
     """
-    Handles shop interactions
+    Handles trap
     :param p: Instance of player class
     :return: None
     """
-    dmg = p.maxHp // random.choice(range(1, 21))
-    print(random.choice(range(1, 21)))
-    print(dmg)
+    rng = random.choice(range(1, 21)) / 100
+    print("Rng:", rng)
+    dmg = math.ceil(p.maxHp * rng)
+    print("Dmg:", dmg)
     p.currentHp -= dmg
 
-    if dmg > 10:
+    if dmg > p.maxHp * .1:
         print("You stepped on a branch. ", end="")
     elif dmg > 1:
         print("You got hit by an interstellar alien laser. ", end="")
@@ -155,9 +157,8 @@ def Trap(p):
     p.Stats()
 
     if p.currentHp <= 0:
-        print("Battle lost")
+        print("Died of skill issue")
         sys.exit()
-
     return
 
 
@@ -194,7 +195,7 @@ def UseItem(p):
 
         # match user input with dict key
         if choice in item.lower():
-            print("Item found")
+            # print("Item found")
             p.inventory[item][0] -= 1
 
             # apply item effect
@@ -243,13 +244,33 @@ def UseItem(p):
 
             break
         else:
-            print("Item not found")
+            # print("Item not found")
+            pass
 
     # print(p.inventory)
     return
 
 
-def showMap(map:list[list[int]]):
+def showMap(map: list[list[int]]) -> None:
+    """
+    Shows currently explored map
+    :param list[list[int]] map: Player's exploration progress
+    :return: None
+    """
+    ClearText()
+    print("Legend:\n"
+        "0 = wall\n"
+        "1 = path\n"
+        "2 = enemy\n"
+        "3 = shop\n"
+        "4 = trap\n"
+        "5 = boss\n")
+
+    for row in map:
+        print(row)
+
+    # intermediate step before clearing screen
+    next = input("> ")
     return
 
 
@@ -263,6 +284,7 @@ def EndScript(input: str) -> None:
     :return: None
     """
     if str(input).lower() == "q":
+        exec(open("theEnd.py").read())
         sys.exit()
     return
 

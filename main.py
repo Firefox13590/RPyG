@@ -8,11 +8,6 @@ import sys
 import os
 
 p = Player()
-explo = [[9, 9, 9, 9, 9],
-        [9, 9, 9, 9, 9],
-        [9, 9, 9, 9, 9],
-        [9, 9, 9, 9, 9],
-        [9, 9, 9, 9, 9]]
 adventure = [map1, map2, map3]  #list of maps
 progress = 0 #map progress
 #print(map1)
@@ -80,11 +75,11 @@ while True:
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
         elif mvt == "M":
-            showMap(explo)
+            showMap(cm)
             pass
         else:
             EndScript(mvt)
-            print("the road is blocked or the input is invalid")
+            print("The road is blocked or the input is invalid")
             mvt = ""
 
-print("Thank you so much a-for-to playing my game!\n:D")
+# print("Thank you so much a-for-to playing my game!\n:D")

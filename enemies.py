@@ -72,7 +72,7 @@ class Goblin(Enemy):
 class CursedTree(Enemy):
     def __init__(self):
         super().__init__()
-        self.maxHp = 20
+        self.maxHp = 15
         self.currentHp = self.maxHp
         self.att = range(1, 2)
         self.df = 20
