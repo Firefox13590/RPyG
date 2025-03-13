@@ -49,7 +49,7 @@ class Slime(Enemy):
 class Goblin(Enemy):
     def __init__(self):
         super().__init__()
-        self.maxHp = 15
+        self.maxHp = 10
         self.currentHp = self.maxHp
         self.att = range(5)
         self.df = 3
@@ -74,7 +74,7 @@ class CursedTree(Enemy):
         super().__init__()
         self.maxHp = 15
         self.currentHp = self.maxHp
-        self.att = range(1, 2)
+        self.att = range(1, 3)
         self.df = 20
         self.spd = 1
         self.drop = range(4, 10)
@@ -92,15 +92,65 @@ class CursedTree(Enemy):
     pass
 
 
-class E4(Enemy):
+class BlueHairedGirl(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.maxHp = 15
+        self.currentHp = self.maxHp
+        self.att = range(2, 5)
+        self.df = 10
+        self.spd = 10
+        self.drop = range(10, 16)
+
+    def Sprite(self):
+        print(r'''
+            ______________
+           /__/\/\/\/\/\__\
+          |  /          \  |
+          | |  (0    0)  | |
+          |  \    \/    /  |
+          |   \________/   |
+        ''')
+        pass
+
     pass
 
 
-class E5(Enemy):
+class FriendBear(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.maxHp = 30
+        self.currentHp = self.maxHp
+        self.att = range(2, 4)
+        self.df = 25
+        self.spd = 15
+        self.drop = range(12, 23)
+
+    def Sprite(self):
+        print(r'''
+            ʕ·ᴥ·ʔ
+        ''')
+        pass
+
     pass
 
 
 class E6(Enemy):
+    def __init__(self):
+        super().__init__()
+        self.maxHp = 20
+        self.currentHp = self.maxHp
+        self.att = range(4, 6)
+        self.df = 15
+        self.spd = 20
+        self.drop = range(17, 26)
+
+    def Sprite(self):
+        print(r'''
+            ʕ·ᴥ·ʔ
+        ''')
+        pass
+
     pass
 
 
@@ -130,7 +180,7 @@ class Wormathron(Enemy):
         self.att = range(2, 5)
         self.df = 10
         self.spd = 10
-        self.drop = range(10, 20)
+        self.drop = range(10, 21)
 
     def Sprite(self):
         print(r'''

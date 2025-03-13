@@ -25,7 +25,7 @@ while True:
         if cm == map1:
             mob = random.choice((Slime(), Goblin(), CursedTree()))
         elif cm == map2:
-            mob = random.choice((E4(), E5(), E6()))
+            mob = random.choice((BlueHairedGirl(), FriendBear(), E6()))
         elif cm == map3:
             mob = random.choice((E7(), E8(), E9()))
         mob.currentHp = mob.maxHp
@@ -44,7 +44,7 @@ while True:
             Fight(p, B2())
         elif cm == map3:
             Fight(p, B3())
-            break
+            exec(open("theEnd.py").read())
         if progress < 2:
             progress += 1
 
@@ -63,7 +63,7 @@ while True:
         if p.x != 4 and cm[p.y][p.x + 1] != 0:
             print("D: East")
 
-        mvt = input("M: Show map\n> ").upper()
+        mvt = input("> ").upper()
 
         # movement
         if mvt == "W" and p.y != 0 and cm[p.y - 1][p.x] != 0:
@@ -74,9 +74,6 @@ while True:
             p.y += 1
         elif mvt == "D" and p.x != 4 and cm[p.y][p.x + 1] != 0:
             p.x += 1
-        elif mvt == "M":
-            showMap(cm)
-            pass
         else:
             EndScript(mvt)
             print("The road is blocked or the input is invalid")

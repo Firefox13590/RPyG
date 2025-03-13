@@ -45,7 +45,7 @@ def Fight(player: Player, enemy: Enemy|Boss) -> None:
                 move = 1
             # possible battle actions
             if move == 1:
-                dmg = random.choice(attacker.att)
+                dmg = abs(int(random.choice(attacker.att) - (defender.df / 10)))
                 print(f"{attacker.__class__.__name__} Dealt {dmg} damage")
                 defender.currentHp -= dmg
             elif move == 2: #player only action
@@ -142,7 +142,7 @@ def Trap(p):
     """
     rng = random.choice(range(1, 21)) / 100
     print("Rng:", rng)
-    dmg = math.ceil(p.maxHp * rng)
+    dmg = math.ceil(p.maxHp * rng) if rng <= .04 else int(p.maxHp * rng)
     print("Dmg:", dmg)
     p.currentHp -= dmg
 
@@ -248,29 +248,6 @@ def UseItem(p):
             pass
 
     # print(p.inventory)
-    return
-
-
-def showMap(map: list[list[int]]) -> None:
-    """
-    Shows currently explored map
-    :param list[list[int]] map: Player's exploration progress
-    :return: None
-    """
-    ClearText()
-    print("Legend:\n"
-        "0 = wall\n"
-        "1 = path\n"
-        "2 = enemy\n"
-        "3 = shop\n"
-        "4 = trap\n"
-        "5 = boss\n")
-
-    for row in map:
-        print(row)
-
-    # intermediate step before clearing screen
-    next = input("> ")
     return
 
 

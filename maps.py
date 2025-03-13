@@ -29,10 +29,10 @@ world = (map1, map2, map3)
 # print(map2)
 # print(map3)
 
-for map in world:
-    print("[", end="")
-
-    for i in range(len(map)):
-        print(map[i], end="") if i == len(map) - 1 else print(map[i])
-
-    print("]\n")
+# for map in world:
+#     print("[", end="")
+#
+#     for i in range(len(map)):
+#         print(map[i], end="") if i == len(map) - 1 else print(map[i])
+#
+#     print("]\n")
